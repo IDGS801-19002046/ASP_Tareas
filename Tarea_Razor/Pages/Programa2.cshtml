@@ -1,0 +1,35 @@
+﻿@page
+@model Tarea_Razor.Pages.Programa2Model
+@{
+}
+
+<h2>Encriptado</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label for="mensaje" class="form-label">Mensaje :</label>
+        <input type="text" class="form-control" id="mensaje" name="Mensaje" asp-for="Mensaje">
+    </div>
+    <div class="mb-3">
+        <label for="desplazamiento" class="form-label">Desplazamiento (N) :</label>
+        <input type="number" class="form-control" id="desplazamiento" name="Desplazamiento" asp-for="Desplazamiento">
+    </div>
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary me-2" asp-page-handler="Encode">Codificar</button>
+        <button type="submit" class="btn btn-info" asp-page-handler="Decode">Decodificar</button>
+    </div>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.Codificar))
+{
+    <div class="alert alert-success mt-3">
+        <strong>Mensaje Codificado: </strong>@Model.Codificar
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(Model.Decodificar))
+{
+    <div class="alert alert-success mt-3">
+        <strong>Mensaje Decodificado: </strong>@Model.Decodificar
+    </div>
+}

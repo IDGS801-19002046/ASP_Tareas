@@ -1,0 +1,94 @@
+﻿@page
+@model Tarea_Razor.Pages.Programa3Model
+@{
+}
+<h2> Formula del binomio de Newton </h2>
+
+
+<br />
+<form method="post">
+    <div class="container text-center">
+        <div class="row align-items-start">
+            <div class="col">
+                <div class="form-floating mb-3">
+                    <input type="number" class="form-control" placeholder="a" asp-for="a">
+                    <label for="floatingInput">Ingresa el valor de a: </label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-floating mb-3">
+                    <input type="number" class="form-control" placeholder="b" asp-for="b">
+                    <label for="floatingInput">Ingresa el valor de b: </label>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-start">
+            <div class="col">
+                <div class="form-floating mb-3">
+                    <input type="number" class="form-control" placeholder="x" asp-for="x">
+                    <label for="floatingInput">Ingresa el valor de x: </label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-floating mb-3">
+                    <input type="number" class="form-control" placeholder="y" asp-for="y">
+                    <label for="floatingInput">Ingresa el valor de y: </label>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-start">
+            <div class="col">
+                <div class="form-floating mb-3">
+                    <input type="number" class="form-control" placeholder="n" asp-for="n">
+                    <label for="floatingInput">Ingresa el valor de n: </label>
+                </div>
+            </div>
+            <div class="col">
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <input type="submit" value="Calcular" class="btn btn-info me-2" />
+    </div>
+    <h3>Primera Forma: </h3><br />
+    <h6>(@Model.a * @Model.x) + (@Model.b * @Model.y)<sup>@Model.n</sup>= @Model.f1</h6>
+    @{
+        double suma = 0;
+        <h3>Segunda Forma: </h3>
+        for (var k = 0; k <= Model.n; k++)
+        {
+            double factorial = Factorial(Model.n) / ((Factorial(k)) * Factorial((Model.n - k)));
+            int ax = Model.a * Model.x;
+            int by = Model.b * Model.y;
+            int pot = Model.n - k;
+            double resultado = factorial * Math.Pow(ax, pot) * Math.Pow(by, k);
+            suma = resultado + suma;
+  
+            <br />
+            <h6>
+                k = @k <br />(@Model.n <br /> @k) (@Model.a * @Model.x) <sup> @Model.n - @k</sup> * (@Model.b * @Model.y) <sup>@k</sup>
+                = (@factorial) (@ax) <sup> @pot </sup> (@factorial)<sup> @k </sup>= @resultado<br /><br/> (  @Model.n <br /> @k)     = @Model.n ! <br /> _____________<br />@k !( @Model.n - @k)!
+            </h6>
+        }<br /><h6>Resultado = @suma</h6>
+
+        static long Factorial(int n)
+        {
+            if (n == 0 || n == 1)
+            {
+                return 1;
+            }
+            else
+            {
+                long result = 1;
+
+                for (int i = 1; i <= n; i++)
+                {
+                    result *= i;
+                }
+                return result;
+            }
+        }
+
+    }
+</form>
+

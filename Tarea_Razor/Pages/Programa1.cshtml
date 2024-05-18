@@ -1,0 +1,82 @@
+﻿@page
+@model Tarea_Razor.Pages.Programa1Model
+@{
+}
+
+<h3>Calculó de IMC (Índice de Masa Corporal)</h3>
+<form method="post">
+    <div class="container text-center">
+        <div class="row align-items-start">
+                <div class="form-floating mb-3">
+                    <input type="number" class="form-control" placeholder="Peso" asp-for="peso" required>
+                    <label for="floatingInput">Ingresa tu peso (KG): </label>
+                </div>
+           
+            
+                <div class="form-floating mb-3">
+                    <input type="number" class="form-control" placeholder="Altura" asp-for="altura" required>
+                    <label for="floatingInput">Ingresa tu altura (CM): </label>
+                </div>    
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <input type="submit" value="Calcular" class="btn btn-primary me-2" />
+        <button type="button" class="btn btn-info" onclick="limpiarCampos()">Limpiar</button>
+    </div>
+</form>
+
+<script>
+    function limpiarCampos() {
+        document.querySelector('[name="peso"]').value = '';
+        document.querySelector('[name="altura"]').value = '';
+    }
+</script>
+
+@if (Model.imc > 0)
+{
+    <div class="text-center mt-3">
+       <strong>IMC = @Model.imc.ToString("F4")</strong>
+        @{
+            var mensaje = "";
+            var imagenUrl = "";
+        }
+
+        @switch (Model.imc)
+        {
+            case double n when (n < 18):
+                mensaje = "Se encuentra con Peso Bajo.";
+                imagenUrl = "../resources/pesobajo.png";
+                break;
+
+            case double n when (n >= 18 && n < 25):
+                mensaje = "Se encuentra en Su Peso Normal.";
+                imagenUrl = "../resources/pesonormal.png";
+                break;
+
+            case double n when (n >= 25 && n < 27):
+                mensaje = "Se encuentra Con Sobre Peso.";
+                imagenUrl = "../resources/sobrepeso.png";
+                break;
+
+            case double n when (n >= 27 && n < 30):
+                mensaje = "Se encuentra con Obesidad grado I.";
+                imagenUrl = "../resources/obesidad.png";
+                break;
+
+            case double n when (n >= 30 && n < 40):
+                mensaje = "Se encuentra con Obesidad grado II.";
+                imagenUrl = "../resources/obesidadsevera.png";
+                break;
+
+            default:
+                mensaje = "Se encuentra con Obesidad grado III.";
+                imagenUrl = "../resources/obesidadmorbida.png";
+                break;
+        }
+
+        <div>
+            <strong>@mensaje</strong><br />
+            <img src="@imagenUrl" alt="IMC Imagen" style="max-width: 100%; height: auto;" />
+        </div>
+    </div>
+}

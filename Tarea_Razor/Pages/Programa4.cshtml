@@ -1,0 +1,41 @@
+﻿@page
+@model Tarea_Razor.Pages.Programa4Model
+@{
+}
+
+
+<form method="post">
+    <h6>La suma de los numeros del  arreglo es: @Model.suma</h6>
+    <h6>La media del arreglo es: @Model.media</h6>
+    <h6>La moda del arreglo es: @Model.moda</h6>
+    <h6>La mediana del arreglo es: @Model.mediana</h6>
+
+    <table class="table">
+        <thead>
+            <tr>
+                @for (var i = 1; i < 21; i++)
+                {
+                    <th scope="col">No. @i</th>
+                }
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                @foreach (int numero in @Model.numeros)
+                {
+                    <td>@numero</td>
+                }
+            </tr>
+            <tr>
+                @foreach (int ordenado in Model.ordenados)
+                {
+                    <td>@ordenado</td>
+                }
+            </tr>
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-center">
+        <input type="submit" value="Calcular" class="btn btn-info me-2" />
+    </div>
+</form>
